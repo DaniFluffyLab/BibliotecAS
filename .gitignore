@@ -1,1 +1,7 @@
+# Remove os arquivos de configuração do clasp.
+# Eles são únicos para cada projeto, então mantê-los só geraria conflitos.
 **/.clasp.json
+
+# Exclui os autosaves do Krita
+**~
+**autosave.kra
