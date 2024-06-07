@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+
+  <!-- Definição de estilo -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Emoji:wght@300..700&family=Quicksand:wght@300..700&display=swap"
+    rel="stylesheet">
+
+
+  <style>
+    /* Esquema de cores */
+    :root {
+      background-color: #faf8f4;
+      --primary-color: #73392C;
+      --secondary-color: #b96951;
+      --background-color: #ebe6e1;
+      --border-color: #401E24;
+      --text-color: #401E24;
+      --shadow-color: #401E2450;
+
+      @media (prefers-color-scheme: dark) {
+        background-color: #202020;
+        --primary-color: #73392C;
+        --secondary-color: #b96951;
+        --background-color: #101010;
+        --border-color: #ebd8cd;
+        --text-color: #ebd8cd;
+        --shadow-color: #393837bf;
+      }
+    }
+
+    /* Regras para todos os elementos */
+    * {
+      font-family: "Quicksand", "Noto Emoji", sans-serif;
+      color: var(--text-color);
+      scrollbar-width: thin;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Botões */
+    .button {
+      display: inline-block;
+      background-color: var(--primary-color);
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      border: none;
+      margin: 10px 0;
+      padding: 7px 20px;
+      cursor: pointer;
+      transition: 100ms ease-in-out;
+
+      &.close {
+        padding: 7px 10px;
+        font-weight: 800;
+        border-radius: 1000000px;
+
+        &:before {
+          content: "✖"
+        }
+      }
+
+      &:hover {
+        background-color: var(--secondary-color);
+      }
+    }
+
+
+    /* Menu de filtros */
+    nav {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      width: 240px;
+      height: calc(100vh - 40px);
+      padding-right: 20px;
+      border-right: var(--border-color) solid 1px;
+      overflow: auto;
+
+
+      /* Filtros */
+      .filters {
+        display: flex;
+        gap: 10px;
+
+        /* Botão de filtrar (mobile) */
+        .button {
+          display: none;
+          width: fit-content;
+          height: fit-content;
+          margin: 0;
+
+          &[value="true"] {
+            background-color: var(--secondary-color);
+          }
+        }
+
+        /* Barra de pesquisa */
+        #search {
+          width: calc(100% - 30px);
+          padding: 5px 15px;
+          margin-bottom: 15px;
+          border: unset;
+          border-bottom: var(--border-color) solid 1px;
+          outline: unset;
+          background: transparent;
+        }
+      }
+
+      /* Container de filtros de gêneros */
+      #allCollections {
+        list-style-type: none;
+
+        & li {
+          margin-top: 10px;
+          cursor: pointer;
+
+          &[onclick="filter.byCollection('')"] {
+            display: none
+          }
+        }
+      }
+
+      /* Adaptação para mobile */
+      @media (max-width: 768px) {
+        position: unset;
+        width: calc(100% - 30px);
+        height: 20px;
+        padding: 15px;
+        border: unset;
+        overflow: hidden;
+
+        .filters .button {
+          display: inline-block;
+        }
+
+        &:has(.button[value="true"]) {
+          height: unset;
+        }
+      }
+    }
+
+    /* Tela principal */
+    main {
+      position: absolute;
+      top: 20px;
+      left: 300px;
+
+      @media (max-width: 768px) {
+        position: unset;
+        width: calc(100% - 30px);
+        height: unset;
+        padding: 15px;
+      }
+
+      /* Container com todos os livros */
+      #allBooks {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: top;
+        justify-content: center;
+
+      }
+
+      /* Container do livro */
+      .book {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 10px;
+        width: 250px;
+        cursor: pointer;
+
+        /* Thumbnail */
+        & img {
+          width: 185px;
+          height: 270px;
+          margin: 10px 7px;
+          object-fit: cover;
+          border-radius: 5px;
+          border: 1px solid var(--border-color);
+
+        }
+
+        & * {
+          transition: 100ms ease-in-out;
+          text-align: center;
+        }
+
+        &:hover {
+          & img {
+            margin: 0;
+            width: 199px;
+            height: 290px;
+            box-shadow: 0 0 15px var(--shadow-color);
+          }
+
+          & .seeMore {
+            background-color: var(--secondary-color);
+          }
+        }
+      }
+    }
+
+    /* Popup de detalhes */
+    body:has(#popup) {
+      overflow: hidden;
+
+      /* Fundo */
+      #popup {
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: linear-gradient(var(--shadow-color), var(--shadow-color)) #000000cc;
+        transition: 100ms ease-in-out;
+        opacity: 0%;
+
+        &[show="true"] {
+          opacity: 100%;
+        }
+      }
+
+      /* Card */
+      & article {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        width: calc(100% - 80px);
+        max-height: calc(90% - 80px);
+        margin: 20px;
+        padding: 20px;
+        border-radius: 15px;
+        background-color: var(--background-color);
+
+        @media (max-width: 480px) {
+          flex-direction: column;
+          overflow: auto;
+        }
+      }
+
+      /* Coluna da thumbnail */
+      .thumbnail {
+        width: 40%;
+        max-width: 300px;
+        display: block;
+        text-align: center;
+        overflow: hidden;
+
+        & img {
+          width: 100%;
+        }
+
+        @media (max-width: 480px) {
+          width: 100%;
+          max-width: unset;
+          max-height: 300px;
+          overflow: unset;
+
+          & img {
+            width: unset;
+            max-height: 300px;
+            max-width: 100%;
+          }
+        }
+      }
+
+      /* Coluna dos dados */
+      .data {
+        width: 66%;
+        min-width: calc(100% - 300px);
+
+        @media (max-width: 480px) {
+          width: 100%;
+        }
+      }
+
+      .close.button {
+        position: absolute;
+        top: 25px;
+        right: 35px
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+  <nav>
+    <div class="filters">
+      <button class="button" value="false" onclick="this.value = (this.value == 'false')">Coleções</button>
+      <input type="text" placeholder="🔍 Pesquisar" id="search" oninput="filter.search(this.value)">
+    </div>
+    <div class="menuCollections">
+      <h3>Coleções</h3>
+      <ul id="allCollections">
+        <li onclick="filter.byCollection('')">Mostrar tudo</li>
+      </ul>
+    </div>
+  </nav>
+  <main>
+    <h1 id="pageTitle">Todos os livros</h1>
+    <div id="allBooks">
+    </div>
+  </main>
+
+
+  <!-- Script de inserção dos containeres de livros -->
+  <script>
+    var insertElement = {
+
+            // Adicionar item de livro
+            bookItems: function (obj) {
+                let collections = []
+                obj.forEach(item => {
+                    collections.push(item.collection)
+                    document.querySelector("#allBooks").insertAdjacentHTML("beforeend", `
+                        <section class="book"
+
+                            data-title="${item.title}"
+                            data-author="${item.author}"
+                            data-collection="${item.collection}"
+                            data-description="${item.description}"
+                            data-downloadLink="${item.downloadLink}"
+                            data-thumbnail="${item.thumbnail}"
+                            data-search="${(item.title + item.author + item.collection + item.description).toLowerCase()}"
+                            onclick="insertElement.popup(this.dataset)">
+                            
+
+                            <img src="${item.thumbnail}" alt="Capa do livro '${item.title}'" loading="lazy">
+                            <h2 class="title">${item.title}</h2>
+                            <p class="author">${item.author}</p>
+                            <p class="button">Ver mais</p>
+
+                        </section>
+                    `)
+                })
+                let collectionUniq = [...new Set(collections)]
+                collectionUniq.sort()
+                collectionUniq.forEach(collection => {
+                    document.querySelector("#allCollections").insertAdjacentHTML("beforeend", `
+                     <li data-value="${collection}" onclick="filter.byCollection(this.dataset.value)">${collection}</li>`)
+                })
+            },
+
+            // Criar popup
+            popup: function (item) {
+
+                // Insere o HTML do popup
+                document.body.insertAdjacentHTML("afterbegin", `
+                    <div id="popup">
+                        <article>
+                            <button class="close button" onclick="popupClose()"></button>
+                            <div class="thumbnail" onclick="openBook('${item.downloadlink}')">
+                                <img src="${item.thumbnail}" alt="Capa do livro '${item.title}'">
+                            </div>
+                            <section class="data">
+                                <h1 onclick="openBook('${item.downloadlink}')">${item.title}</h1>
+                                <p><span style="font-weight: 600;">Autor: </span>${item.author}</p>
+                                <p><span style="font-weight: 600;">Coleção: </span>${item.collection}</p>
+                                <p><button class="button" onclick="openBook('${item.downloadlink}')">Acesse o livro</button></p>
+                                <p><span style="font-weight: 600;">Sinopse:</span><br>${item.description.replaceAll("\n", "<br>")}</p>
+                            </section>
+                        </article>
+                    </div>
+                `)
+
+                // Cria o delay necessário para o fade
+                setTimeout(() => {
+                    document.querySelector("#popup").setAttribute("show", "true")
+                }, 1)
+
+            }
+        }
+
+        // Filtros
+        var filter = {
+
+            // Filtrar por palavra-chave
+            search: function (keyword) {
+
+                // Remove filtros anteriores caso existam
+                try { document.querySelector("#filter").remove() } catch (e) { }
+                document.body.scrollTop = 0; // For Safari
+                document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+
+                // Se palavra-chave está em branco, renomear página e parar
+                if (keyword == "") { document.querySelector("#pageTitle").textContent = `Todos os livros`; return }
+
+                // Adicionando título na página
+                document.querySelector("#pageTitle").textContent = `Pesquisando por "${keyword}"`
+
+                // Cria filtro por CSS
+                document.body.insertAdjacentHTML("afterbegin", `
+                <style id="filter">
+                    #allBooks .book { display: none; }
+                    li[onclick="filter.byCollection('')"] { display: block!important }
+                    #allBooks .book[data-search*="${keyword.toLowerCase()}"] { display: flex; }
+                </style>
+                `)
+            },
+
+            // Filtrar por coleção
+            byCollection: function (collection) {
+
+                // Remove filtros anteriores caso existam
+                try { document.querySelector("#filter").remove() } catch (e) { }
+
+                // Desativa o botão de filtro e limpando busca
+                document.querySelector("nav .filters .button").value = "false"
+                document.querySelector("#search").value = ""
+                document.body.scrollTop = 0; // For Safari
+                document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+
+                // Se palavra-chave está em branco, renomear página e parar
+                if (collection == "") { document.querySelector("#pageTitle").textContent = `Todos os livros`; return }
+
+                // Adicionando título na página
+                document.querySelector("#pageTitle").textContent = `Coleção: "${collection}"`
+
+                // Cria filtro por CSS
+                document.body.insertAdjacentHTML("afterbegin", `
+                <style id="filter">
+                    #allBooks .book { display: none; }
+                    li[onclick="filter.byCollection('')"] { display: block!important }
+                    #allBooks .book[data-collection="${collection}"] { display: flex; }
+                    li[data-value="${collection}"] {font-weight: 800}
+                </style>
+                `)
+            },
+
+        }
+
+        // Remove popup
+        function popupClose() {
+            let popup = document.querySelector("#popup")
+            popup.setAttribute("show", "false")
+            setTimeout(() => popup.remove(), 150)
+        }
+
+        // Abrir livro e registrar
+        function openBook(link) {
+            google.script.run.addLog(link)
+            window.open(link)
+        }
+
+        // Iniciar programa
+        google.script.run.withSuccessHandler(insertElement.bookItems).createObject()
+
+  </script>
+
+</body>
+
+</html>
