@@ -14,6 +14,7 @@ BibliotecAS é um site de biblioteca digital gerenciado por uma Planilha Google 
 - [Instalação](#instalação)
 - [Sobre este projeto](#sobre-este-projeto)
 - [Problemas conhecidos e próximos passos](#problemas-conhecidos-e-próximos-passos)
+- [Agradecimentos](#agradecimentos)
 
 ## Instalação
 
@@ -98,6 +99,11 @@ Eu já montei a folha de estilos do site pensando em deixar as cores e fontes si
 
 _"É uma biblioteca. E ela está no Apps Script. Logo, 'BibliotecAS'!"_<br>
 Isso foi o melhor que eu consegui pensar em meses, desculpe :p
+
+## Agradecimentos
+
+- Aos meus colegas de curso **Aline**, **Geize**, **Gilmar** e **Paula**, por me ajudarem a elaborar a ideia deste projeto e me dar o apoio didático e pedagógico;
+- Ao meu amigo **Cian**, por me ajudar a entender como eu subia esse projeto no GitHub :p
 
 ---
 
