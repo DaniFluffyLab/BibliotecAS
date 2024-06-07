@@ -4,7 +4,7 @@
 
 BibliotecAS é um site de biblioteca digital gerenciado por uma Planilha Google e auto-hospedado pelo Google Apps Script, sem a necessidade de pagar por um serviço de hospedagem ou do usuário ter conhecimento técnico sobre sites.
 
-[<p align="center"><img alt="Veja uma demonstração" height="35px" src="README files/demo.png"></p>](https://sites.google.com/view/bibliotecas-demo)
+<p align="center"><a href="https://sites.google.com/view/bibliotecas-demo"><img alt="Veja uma demonstração" height="35px" src="README files/demo.png"></a></p>
 
 > [!NOTE]
 > O BibliotecAS foi pensado para uso em pequena escala, para uso no site da sua escola, por exemplo. Se você está procurando por uma solução mais robusta, sugiro você dar uma olhada no [Calibre Web](https://github.com/janeczku/calibre-web), de onde eu tirei boa parte da ideia desse projeto.
