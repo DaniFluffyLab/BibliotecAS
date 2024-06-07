@@ -4,7 +4,7 @@
 
 BibliotecAS é um site de biblioteca digital gerenciado por uma Planilha Google e auto-hospedado pelo Google Apps Script, sem a necessidade de pagar por um serviço de hospedagem ou do usuário ter conhecimento técnico sobre sites.
 
-[<center><img alt="Veja uma demonstração" height="35px" src="README files/demo.png"></center>](https://sites.google.com/view/bibliotecas-demo)
+[<p align="center"><img alt="Veja uma demonstração" height="35px" src="README files/demo.png"></p>](https://sites.google.com/view/bibliotecas-demo)
 
 > [!NOTE]
 > O BibliotecAS foi pensado para uso em pequena escala, para uso no site da sua escola, por exemplo. Se você está procurando por uma solução mais robusta, sugiro você dar uma olhada no [Calibre Web](https://github.com/janeczku/calibre-web), de onde eu tirei boa parte da ideia desse projeto.
@@ -17,56 +17,49 @@ BibliotecAS é um site de biblioteca digital gerenciado por uma Planilha Google 
 
 ## Instalação
 
-<style>
-    img[src*="install"] {
-        border-radius: 10px;
-        width: 600px;
-    }
-</style>
-
 - [Copie esta planilha para seu Google Drive clicando aqui.](https://docs.google.com/spreadsheets/d/1zM1X_fSotptsF9_zUGFs7xE8Uzn11dBWcFXhHh-yu7Q/copy)
-<br><br> <img src="README files/install-1.png">
+<br><br> <img style="border-radius: 10px; width: 600px;" src="README files/install-1.png">
 
 - Assim que abrir a planilha, você receberá uma mensagem de boas-vindas, o instruindo a ir no menu e clicar em "Instalar biblioteca". Clique em OK, vá ao menu e clique em "Instalar planilha".
-<br><br> <img src="README files/install-2.png">
-<br> <img src="README files/install-3.png">
+<br><br> <img style="border-radius: 10px; width: 600px;" src="README files/install-2.png">
+<br> <img style="border-radius: 10px; width: 600px;" src="README files/install-3.png">
 
 - Você será solicitado a dar as permissões que o app precisa. Clique em OK.
-<br><br> <img src="README files/install-4.png">
+<br><br> <img style="border-radius: 10px; width: 600px;" src="README files/install-4.png">
 
 - Na tela que segue, você será avisado que o Google não verificou este app. É normal, o Google sempre mostra isso para projetos do Apps Script que não foram publicados no seu Marketplace. Clique em "Avançado" e em "Acessar Backend da Biblioteca Digital".
-<br><br> <img src="README files/install-5.png">
+<br><br> <img style="border-radius: 10px; width: 600px;" src="README files/install-5.png">
 
 - Dê as permissões que o app precisa.
-<br><br> <img src="README files/install-6.png">
+<br><br> <img style="border-radius: 10px; width: 600px;" src="README files/install-6.png">
 
 - Assim que a janela fechar, vá em "Extensões" e clique em "Apps Script".
-<br><br> <img src="README files/install-7.png">
+<br><br> <img style="border-radius: 10px; width: 600px;" src="README files/install-7.png">
 
 - No Apps Script, clique em "Implantar", e em "Nova implantação".
-<br><br> <img src="README files/install-8.png">
+<br><br> <img style="border-radius: 10px; width: 600px;" src="README files/install-8.png">
 
 - Na tela que aparecer, as opções "Executar como" deve estar como "Eu", e "Quem pode acessar" deve estar como "Qualquer pessoa". Depois, clique em "Implantar".
-<br><br> <img src="README files/install-9.png">
+<br><br> <img style="border-radius: 10px; width: 600px;" src="README files/install-9.png">
 
 - Depois que você implantar, copie a URL em azul no fim da janela e volte para a planilha.
-<br><br> <img src="README files/install-10.png">
+<br><br> <img style="border-radius: 10px; width: 600px;" src="README files/install-10.png">
 
 - Na planilha, vá novamente ao menu e clique em "Instalar planilha".
-<br><br> <img src="README files/install-3.png">
+<br><br> <img style="border-radius: 10px; width: 600px;" src="README files/install-3.png">
 
 - Na tela que abrir, cole o link que você copiou, e clique em OK.
-<br><br> <img src="README files/install-11.png">
+<br><br> <img style="border-radius: 10px; width: 600px;" src="README files/install-11.png">
 
 - Por fim, clique em OK e atualize a página.
-<br><br> <img src="README files/install-12.png">
+<br><br> <img style="border-radius: 10px; width: 600px;" src="README files/install-12.png">
 
 - Assim que atualizar, clique em "Permitir acesso" na barra amarela no topo da planilha.
-<br><br> <img src="README files/install-13.png">
+<br><br> <img style="border-radius: 10px; width: 600px;" src="README files/install-13.png">
 
 - O link da sua Biblioteca Digital fica no menu "Adicionar ao Google Sites". Você pode divulgar diretamente este link, ou inserir em uma página do Google Sites.
-<br><br> <img src="README files/install-14.png">
-<br> <img src="README files/install-15.png">
+<br><br> <img style="border-radius: 10px; width: 600px;" src="README files/install-14.png">
+<br> <img style="border-radius: 10px; width: 600px;" src="README files/install-15.png">
 
 ## Sobre este projeto
 
